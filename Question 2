@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class WeekDays {
+private:
+    string Days[7];
+    int CurrentDay;
+
+public:
+    WeekDays() {
+        Days[0] = "Sunday";
+        Days[1] = "Monday";
+        Days[2] = "Tuesday";
+        Days[3] = "Wednesday";
+        Days[4] = "Thursday";
+        Days[5] = "Friday";
+        Days[6] = "Saturday";
+        CurrentDay = 0; // Sunday
+    }
+
+    WeekDays(int day) {
+        Days[0] = "Sunday";
+        Days[1] = "Monday";
+        Days[2] = "Tuesday";
+        Days[3] = "Wednesday";
+        Days[4] = "Thursday";
+        Days[5] = "Friday";
+        Days[6] = "Saturday";
+
+        if (day > 6)
+            CurrentDay = day % 7;
+        else
+            CurrentDay = day;
+    }
+
+    string getCurrentDay() {
+        return Days[CurrentDay];
+    }
+
+    string getNextDay() {
+        return Days[(CurrentDay + 1) % 7];
+    }
+
+    string getPreviousDay() {
+        return Days[(CurrentDay + 6) % 7];
+    }
+
+    void getNthDayFromToday(int N) {
+        cout << "It will be "
+             << Days[(CurrentDay + N) % 7]
+             << " in " << N << " days." << endl;
+    }
+};
+
+int main() {
+    WeekDays d1(8);  
+
+    cout << "Current Day: " << d1.getCurrentDay() << endl;
+    cout << "Next Day: " << d1.getNextDay() << endl;
+    cout << "Previous Day: " << d1.getPreviousDay() << endl;
+    d1.getNthDayFromToday(20);
+
+    return 0;
+}
