@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SmartDevice {
+private:
+    string deviceName;
+    string deviceType;
+    bool isOn;
+
+public:
+    SmartDevice(string name, string type, bool status) {
+        deviceName = name;
+        deviceType = type;
+        isOn = status;
+
+        cout << "🔌 " << deviceName << " (" << deviceType << ") is now "
+             << (isOn ? "ON" : "OFF") << "." << endl;
+    }
+
+    ~SmartDevice() {   // destructor
+        cout << "💤 " << deviceName
+             << " is powering down forever. Goodbye, loyal gadget." << endl;
+    }
+
+    void showStatus() {
+        cout << deviceName << " is currently "
+             << (isOn ? "ON" : "OFF") << "." << endl;
+    }
+};
+
+int main() {
+    SmartDevice light("Drawing room Light", "Smart Light", true);
+    SmartDevice vacuum("RoboCleaner", "Robo Vacuum", false);
+
+    cout << endl;
+
+    SmartDevice* coffeeMachine =
+        new SmartDevice("CoffeeMaster 3000", "Coffee Overlord", true);
+
+    delete coffeeMachine; 
+
+    cout << "\nEnding.. Remaining devices will now shut down...\n";
+    return 0;
+}
