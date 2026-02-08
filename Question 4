@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class CricketPlayer {
+private:
+    string name;
+    int jerseyNumber;
+    int totalRuns;
+    int inningsPlayed;
+    double battingAverage;
+
+public:
+    CricketPlayer(string name, int jerseyNumber, int runs, int innings) {
+        this->name = name;
+        this->jerseyNumber = jerseyNumber;
+        this->totalRuns = runs;
+        this->inningsPlayed = innings;
+        this->battingAverage = (innings > 0) ? (double)runs / innings : 0;
+    }
+
+    CricketPlayer& improveAverage(int bonusRuns) {
+        totalRuns += bonusRuns;
+        battingAverage = (double)totalRuns / inningsPlayed;
+        return *this;
+    }
+
+    void playMatch(int runsScored) {
+        totalRuns += runsScored;
+        inningsPlayed++;
+        battingAverage = (double)totalRuns / inningsPlayed;
+
+        cout << name << " played a match and scored "
+             << runsScored << " runs." << endl;
+    }
+
+    void displayPlayerStats() {
+        cout << "\nPlayer: " << name << endl;
+        cout << "Jersey No: " << jerseyNumber << endl;
+        cout << "Total Runs: " << totalRuns << endl;
+        cout << "Batting Average: " << battingAverage << endl;
+        cout << "Commentary: Form looks solid — the scoreboard approves!" << endl;
+    }
+};
+
+int main() {
+    CricketPlayer babar("Babar Azam", 56, 4100, 90);
+    CricketPlayer rizwan("Muhammad Rizwan", 27, 3900, 85);
+    CricketPlayer saim("Saim Ayub", 67, 1500, 45);
+
+    babar.playMatch(88);
+    rizwan.playMatch(64);
+    saim.playMatch(12);
+
+    babar.improveAverage(40).improveAverage(25);
+    rizwan.improveAverage(30);
+    saim.improveAverage(50).improveAverage(20);
+
+    babar.displayPlayerStats();
+    rizwan.displayPlayerStats();
+    saim.displayPlayerStats();
+
+    return 0;
+}
